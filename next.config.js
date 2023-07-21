@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+require("dotenv").config();
+const nextConfig = {
+  env: {
+    GOOGLE_KEY: "AIzaSyD81jOdjhyWW2jQbRxCNRe0deridnHE0To",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
