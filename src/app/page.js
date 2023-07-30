@@ -10,22 +10,23 @@ export default function Home() {
   const [isTop, setIsTop] = useState(true);
   const [menuActive, setMenuActive] = useState("");
 
+  // Animate
   useEffect(() => {
     const animateWords = () => {
       const word1 = document.querySelector(".banner-word-1");
-      const word2 = document.querySelector(".banner-word-2");
+      // const word2 = document.querySelector(".banner-word-2");
 
-      // const yPosition1 = window.innerHeight / 2 - 40;
-      // const xPosition2 = window.innerWidth - 40;
+      // -> const yPosition1 = window.innerHeight / 2 - 40;
+      // -> const xPosition2 = window.innerWidth - 40;
 
-      // word1.style.transform = `translateY(-20px)`;
+      // -> word1.style.transform = `translateY(-20px)`;
       word1.style.opacity = 1;
-      // word2.style.transform = `translateX(${xPosition2}px)`;
-      word2.style.opacity = 1;
+      // -> word2.style.transform = `translateX(${xPosition2}px)`;
+      // word2.style.opacity = 1;
 
       setTimeout(() => {
         word1.classList.add("animate-slide-down");
-        word2.classList.add("animate-slide-in");
+        // word2.classList.add("animate-slide-in");
       }, 100);
     };
 
@@ -115,7 +116,7 @@ export default function Home() {
         }`}
       >
         <nav className="flex justify-between items-center container mx-auto">
-          <div className="flex items-center">
+          <div className="flex items-center invisible lg:visible md:visible">
             <a href="https://bransaraarquitetura.com" rel="Bransara">
               <Image
                 className="m-r-5 hover:scale-110"
@@ -131,7 +132,7 @@ export default function Home() {
             <li>
               <a
                 href="#home"
-                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-2 py-10 w-28 sm:p-10 xl:p-6
                   ${menuActive === "home" ? "bg-secondary text-primary" : ""}
                 `}
               >
@@ -141,7 +142,7 @@ export default function Home() {
             <li>
               <a
                 href="#sobre"
-                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-2 py-10 w-28 sm:p-10 xl:p-6
                   ${menuActive === "sobre" ? "bg-secondary text-primary" : ""}
                 `}
               >
@@ -151,7 +152,7 @@ export default function Home() {
             <li>
               <a
                 href="#atuação"
-                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-2 py-10 w-28 sm:p-10 xl:p-6
                   ${menuActive === "atuação" ? "bg-secondary text-primary" : ""}
                 `}
               >
@@ -161,7 +162,7 @@ export default function Home() {
             <li>
               <a
                 href="#contato"
-                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-2 py-10 w-28 sm:p-10 xl:p-6
                   ${menuActive === "contato" ? "bg-secondary text-primary" : ""}
                 `}
               >
@@ -169,7 +170,7 @@ export default function Home() {
               </a>
             </li>
           </ul>
-          <div className="flex items-center">
+          <div className="flex items-center invisible lg:visible md:visible">
             <div className="ml-4">
               <a
                 href="https://api.whatsapp.com/send/?phone=554998157502"
@@ -194,13 +195,14 @@ export default function Home() {
           id="home"
           className="h-screen flex items-center justify-center"
         >
-          <div className="bg-gray-300 p-10 rounded-lg">
+          <div className="p-10 rounded-lg">
             <h1 className="banner-word-1 text-5xl text-blue-500 opacity-0 pt-5">
-              Bransara
+              {/* Bransara */}
+              <Image alt="logo" src="/logo.png" width={500} height={200} />
             </h1>
-            <h1 className="banner-word-2 text-5xl text-red-500 opacity-0 pr-5">
+            {/* <h1 className="banner-word-2 text-5xl text-red-500 opacity-0 pr-5">
               Arquitetura
-            </h1>
+            </h1> */}
           </div>
         </section>
 
