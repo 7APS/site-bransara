@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import Image from "next/image";
 
-const myKey =
-  process.env.GOOGLE_KEY;
+const myKey = process.env.GOOGLE_KEY;
 
 export default function Home() {
   const [isTop, setIsTop] = useState(true);
+  const [menuActive, setMenuActive] = useState("");
 
   useEffect(() => {
     const animateWords = () => {
@@ -35,7 +36,40 @@ export default function Home() {
     const handleScroll = () => {
       setIsTop(window.pageYOffset === 0);
     };
+    const handleScrollMenu = () => {
+      const menuItems = document.querySelectorAll(".menu-item");
 
+      function isElementInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+      menuItems.forEach((menuItem) => {
+        const sectionId = menuItem.getAttribute("href");
+        const section = document.querySelector(sectionId);
+
+        if (sectionId != null && isElementInViewport(section)) {
+          if (sectionId === "#home") {
+            setMenuActive("home");
+          } else if (sectionId === "#sobre") {
+            setMenuActive("sobre");
+          } else if (sectionId === "#atuação") {
+            setMenuActive("atuação");
+          } else if (sectionId === "#contato") {
+            setMenuActive("contato");
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollMenu);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -74,44 +108,80 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="font-thin">
+    <div className="font-thin bg-white">
       <header
-        className={`fixed w-full bg-gray-800 text-white py-4 ${
+        className={`fixed w-full bg-primary text-white py-4 h-24 ${
           isTop ? "" : "shadow-lg"
         }`}
       >
-        <nav className="flex justify-between items-center container mx-auto h-24">
+        <nav className="flex justify-between items-center container mx-auto">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold">Bransara</h1>
+            <a href="https://bransaraarquitetura.com" rel="Bransara">
+              <Image
+                className="m-r-5 hover:scale-110"
+                width={37}
+                height={80}
+                src="/white.png"
+                alt="Logo Bransara"
+                priority
+              />
+            </a>
           </div>
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-4 mb-2 text-secondary">
             <li>
-              <a href="#home">home</a>
+              <a
+                href="#home"
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                  ${menuActive === "home" ? "bg-secondary text-primary" : ""}
+                `}
+              >
+                home
+              </a>
             </li>
             <li>
-              <a href="#sobre">sobre</a>
+              <a
+                href="#sobre"
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                  ${menuActive === "sobre" ? "bg-secondary text-primary" : ""}
+                `}
+              >
+                sobre
+              </a>
             </li>
             <li>
-              <a href="#atuação">atuação</a>
+              <a
+                href="#atuação"
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                  ${menuActive === "atuação" ? "bg-secondary text-primary" : ""}
+                `}
+              >
+                atuação
+              </a>
             </li>
             <li>
-              <a href="#contato">contato</a>
+              <a
+                href="#contato"
+                className={`menu-item hover:bg-secondary hover:text-primary font-bold p-6 py-10 w-28
+                  ${menuActive === "contato" ? "bg-secondary text-primary" : ""}
+                `}
+              >
+                contato
+              </a>
             </li>
-            {/* <li>
-              <a href="#map">localização</a>
-            </li> */}
           </ul>
           <div className="flex items-center">
             <div className="ml-4">
               <a
-                href="https://web.whatsapp.com/"
+                href="https://api.whatsapp.com/send/?phone=554998157502"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="WhatsApp Bransara"
               >
-                <img
+                <Image
                   src="/whatsappFlat.png"
                   alt="WhatsApp"
-                  className="w-8 h-8"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 hover:scale-110"
                 />
               </a>
             </div>
@@ -136,21 +206,21 @@ export default function Home() {
 
         <section
           id="sobre"
-          className="h-96 bg-gray-100 flex items-center justify-center"
+          className="sobre h-96 bg-gray-100 flex items-center justify-center"
         >
           <h1>Sobre</h1>
         </section>
 
         <section
           id="atuação"
-          className="h-96 bg-gray-200 flex items-center justify-center"
+          className="atuação h-96 bg-gray-200 flex items-center justify-center"
         >
           <h1>Atuação</h1>
         </section>
 
         <section
           id="contato"
-          className="h-96 bg-gray-300 flex items-center justify-center"
+          className="contato h-96 bg-gray-300 flex items-center justify-center"
         >
           <h1>Contato</h1>
         </section>
